@@ -38,6 +38,9 @@ class JsonCollector(object):
 session = cookie_store.CookieStore('session.yml')
 eero = eero.Eero(session)
 
+# Upon observation it is seen eero runs speedtest every 2 days, your mileage may vary.
+# Do not run this if you are on a metered plan as this involves download/upload of sample files
+# You can set a frequency of your choice in the prometheus scrape, recommendation is every hour
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument("-port", help="port to run the exporter on")

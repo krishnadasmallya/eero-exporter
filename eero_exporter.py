@@ -33,9 +33,8 @@ class JsonCollector(object):
             metric4.add_metric([network_name], network_clients['count'])
             yield metric4
 
+            # This section does come back empty, with lack of documentations available, I had used the most granular period that worked most during my tests
             network_data_usages = eero.data_usage_last_5_min_breakdown(id)
-            # starttime = network_data_usages['start']
-            # endtime = network_data_usages['end']
 
             upload_speed = network_data_usages['upload']
             metric5 = GaugeMetricFamily('eero_network_usage_upload', 'Current upload speed for the eero device', labels=['network'])
@@ -47,7 +46,6 @@ class JsonCollector(object):
             metric6.add_metric([network_name], download_speed)
             yield metric6
 
-            # print(starttime, endtime, upload_speed, download_speed)
             for eeros in network_data_usages['eeros']:
                 label = eeros['location']
                 upload = eeros['upload']
@@ -94,6 +92,7 @@ class JsonCollector(object):
                 metric2.add_metric([network_name, label], download)
                 yield metric2
 
+            # TODO: untested part/segment as I did not have this section available in my account, this may have bugs
             for unprofiled in network_data_usages['unprofiled']:
                 label = unprofiled['name']
                 upload = unprofiled['upload']
