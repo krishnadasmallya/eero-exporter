@@ -1,0 +1,11 @@
+version: '3'
+services:
+  eero-exporter:
+      container_name: Eero Exporter
+      image: prom/prometheus
+      restart: unless-stopped
+      ports:
+        - '9118:9118/tcp'
+        - '9119:9119/tcp'
+      volumes:
+        - 'REPLACE_INSTALLDIR/eero-exporter/data:/data'
